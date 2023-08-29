@@ -21,6 +21,6 @@ public class TerminalCalculator {
     }
 
     private void bootUp() {
-        
+        System.out.println("Starting calculator program...");
     }
 }
