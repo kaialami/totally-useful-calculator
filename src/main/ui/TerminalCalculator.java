@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import main.model.Calculator;
 
-/* Terminal based interface for calculator.
+/* Terminal based interface for calculator. This one doesn't mess with you.
  * 
  * Terminal I/O - https://www.geeksforgeeks.org/ways-to-read-input-from-console-in-java/ 
  */
@@ -28,7 +28,6 @@ public class TerminalCalculator {
         bootUp();
 
         requestExpression();
-        returnResult();
     }
 
     private void returnResult() {
@@ -45,7 +44,13 @@ public class TerminalCalculator {
     private void requestExpression() {
         System.out.println("What would you like me to calculate?");
         String inputExpression = scan.nextLine();
-        calculator.update(inputExpression);
+        try {
+            calculator.update(inputExpression);
+            returnResult();
+
+        } catch (Exception e) {
+            System.out.println("Sorry, that's not something I know how to calculate...");
+        }
         
     }
 
