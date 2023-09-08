@@ -96,6 +96,10 @@ public class CalculatorTest {
         assertEquals("10/4", calc.getExpression());
         assertEquals(2.5, calc.getResult(), delta);
 
+        calc.update("sin(pi)");
+        assertEquals("sin(pi)", calc.getExpression());
+        assertEquals(0, calc.getResult(), delta);
+
 
         System.out.println("    - testUpdateExpressionInput_Success passed");
     }
@@ -123,4 +127,22 @@ public class CalculatorTest {
         System.out.println("    - testUpdateExpressionInput_Fail passed");
     }
 
+
+
+    @Test
+    public void testGetResultInt() {
+        try {
+            calc.update("3/2");
+            assertEquals(1.5, calc.getResult(), delta);
+            assertEquals(1, calc.getResultInt());
+
+            calc.update("4/4");
+            assertEquals(1, calc.getResult(), delta);
+            assertEquals(1, calc.getResultInt());
+        } catch (Exception e) {
+            fail("Unexpected exception was thrown");
+        }
+
+    }
 }
+

@@ -1,5 +1,8 @@
 package main.model;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
@@ -15,10 +18,15 @@ import net.objecthunter.exp4j.ExpressionBuilder;
  * 
  * Calculator holds the true result of evaluating the expression. Intentionally making the result wrong is 
  * not its responsibility. 
+ * 
+ * Truncates floating points to 5th decimal 
+ *      this is an unserious calculator so I'm not concerned about accuracy :)
  */
 
 
 public class Calculator {
+    private static DecimalFormat df = new DecimalFormat("#.#####");
+
     // member variables
     private String expression;
     private double result;
@@ -29,13 +37,16 @@ public class Calculator {
     public Calculator() {
         this.expression = "";
         this.result = 0;
+        df.setRoundingMode(RoundingMode.FLOOR);
     }
 
 
     public void update(String newExpression) {
         this.expression = newExpression;
         Expression exp = new ExpressionBuilder(newExpression).build();
-        this.result = exp.evaluate();
+        this.result = Double.parseDouble(df.format(exp.evaluate()));
+        
+
 
     }
 
@@ -46,6 +57,10 @@ public class Calculator {
 
     public double getResult() {
         return this.result;
+    }
+
+    public int getResultInt() {
+        return (int) this.result;
     }
 
 
