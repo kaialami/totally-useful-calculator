@@ -13,13 +13,13 @@ public class GuiCalculator extends JFrame {
     public static final int HEIGHT = device.getDisplayMode().getHeight();
 
     /*
-     * https://stackoverflow.com/questions/11570356/jframe-in-full-screen-java
      * 
      */
     public GuiCalculator() {
         super("Totally Useful Calculator");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(false);
+        setUndecorated(true);
+        setResizable(false);
 
         initGUI();
     }
