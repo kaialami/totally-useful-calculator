@@ -1,5 +1,6 @@
 package main.model;
 
+import java.util.Arrays;
 import java.util.Random;
 
 /*
@@ -13,6 +14,11 @@ import java.util.Random;
  *              Note that event 8 will take effect before "=" is pressed.
  *   9:     Summer falls asleep! You must wake her up ... but how?
  *   10:    Instead of answering, Summer asks you for a performance review! Don't forget to be truthful.
+ * 
+ * 
+ * TO DO :
+ *      figure out how to do event 8.
+ *      write tests and test everything out.
  */
 public class Summer {
     private static final int MAX_EVENT = 9;
@@ -113,7 +119,7 @@ public class Summer {
         }
 
         prevEvent = 0;
-        event = getNextEvent(0, MAX_EVENT);
+        event = getNextEvent();
     }
 
 
@@ -126,7 +132,7 @@ public class Summer {
             result = calc.getResult();
             reply = calc.getExpression() + " = " + result + ". " + getRandomReply(calcPerformed);
         } else if (event >= 1 && event <= 6) {
-            int addSub = getNextEvent(0, 2);
+            int addSub = getRandomWithExclusion(0, 2, null);
             if (addSub == 0) {
                 result = calc.getResult() + event;
             } else {
@@ -149,17 +155,27 @@ public class Summer {
         }
     
         prevEvent = event;
-        event = getNextEvent(0, MAX_EVENT);
+        event = getNextEvent();
+    }
+
+    // Generates next event randomly. Excludes current event.
+    private int getNextEvent() {
+        int[] exclude = {event};
+        return getRandomWithExclusion(0, MAX_EVENT, exclude);
     }
 
     // https://www.baeldung.com/java-generating-random-numbers-in-range
-    // Generates random int in range [min, max). Excludes current event.
-    private int getNextEvent(int min, int max) {
-        int nextEvent = event;
-        while (nextEvent == event) {
-            nextEvent = (int) ((Math.random() * (max - min)) + min);
+    // Generates random int in range [min, max). Excludes all values in exclude.
+    private int getRandomWithExclusion(int min, int max, int [] exclude) {
+        Arrays.sort(exclude);
+        int random = min + (int) ((max - min + 1 - exclude.length) * Math.random());
+        for (int ex : exclude) {
+            if (random < ex) {
+                break;
+            }
+            random++;
         }
-        return nextEvent;
+        return random;
     }
 
     private String getRandomReply(String[] replies) {
