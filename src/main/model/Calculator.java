@@ -19,13 +19,13 @@ import net.objecthunter.exp4j.ExpressionBuilder;
  * Calculator holds the true result of evaluating the expression. Intentionally making the result wrong is 
  * not its responsibility. 
  * 
- * Truncates floating points to 5th decimal 
+ * Truncates floating points to 3rd decimal 
  *      this is an unserious calculator so I'm not concerned about accuracy :)
  */
 
 
 public class Calculator {
-    private static DecimalFormat df = new DecimalFormat("#.#####");
+    private static DecimalFormat df = new DecimalFormat("#.###");
 
     // member variables
     private String expression;
