@@ -21,7 +21,7 @@ import java.util.Random;
  *      write tests and test everything out.
  */
 public class Summer {
-    private static final int MAX_EVENT = 9;
+    private static final int MAX_EVENT = 10;
     private static final int EXPRESSION_LENGTH = 10;
 
     private static final String[] calcPerformed = { "This is easy!",
