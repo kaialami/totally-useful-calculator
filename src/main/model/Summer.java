@@ -8,29 +8,34 @@ import java.util.Random;
  * She will ask the real calculator (Calculator class) for the proper calculations.
  * event >= 0 represents what kind of trickery Summer will perform on the next calculation!
  *   0:     Nothing happens (first calculation on program start)
- *   1-6:   Adds/subtracts random num 1-6 to result
+ *   1-6:   Adds random num 1-6 to result
  *   7:     Summer gets lazy and refuses to answer
  *   8:     Each number 0-9 gets mapped to a different number (e.g. input 1 + 2 might get you 5 + 3)
  *              Note that event 8 will take effect before "=" is pressed.
  *   9:     Summer falls asleep! You must wake her up ... but how?
  *   10:    Instead of answering, Summer asks you for a performance review! Don't forget to be truthful.
  * 
+ * Legal inputs to calculator:
+ * { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+     "+", "-", "*", "/", "(", ")", "."};
  * 
  * TO DO :
  *      figure out how to do event 8.
  *      write tests and test everything out.
  */
 public class Summer {
-    private static final int MAX_EVENT = 10;
-    private static final int EXPRESSION_LENGTH = 10;
+    public static final int MAX_EVENT = 10;
+    public static final int EXPRESSION_LENGTH = 10;
 
-    private static final String[] calcPerformed = { "This is easy!",
+    public static final String GREETING = "Hello! I'm Summer! You can count on me for your most important calculations!";
+
+    public static final String[] calcPerformed = { "This is easy!",
                                                     "Is that right?",
                                                     "You're welcome!",
                                                     "Next problem, please." ,
                                                     "What's next?"};
 
-    private static final String[] performanceReview = { "Wow... that bad?",
+    public static final String[] performanceReview = { "Wow... that bad?",
                                                         "Hmph, whatever.",
                                                         "Thanks for your feedback.",
                                                         "Thank you!" ,
@@ -39,6 +44,7 @@ public class Summer {
     private Calculator calc;
     private String expression;
     private double result;
+    private String outputResult;
     private int event;
     private int prevEvent;
     private String reply;
@@ -49,9 +55,10 @@ public class Summer {
         calc = new Calculator();
         expression = "";
         result = 0;
+        outputResult = "";
         event = 0;
         prevEvent = event;
-        reply = "Hello! I'm Summer! You can count on me for your most important calculations!";
+        reply = GREETING;
     }
 
     /*
@@ -59,10 +66,15 @@ public class Summer {
      * Called when the following buttons on the calculator is pressed:
      *      Numbers 0-9
      *      +, -, *, /
-     * 
+     *      (, ), .
+     * Does nothing if expression.length >= EXPRESSION_LENGTH.
+     * becomeLonger should not be called with invalid inputs.
+     * character must be of length 1.
      */
     public void becomeLonger(String character) {
-        expression += character;
+        if (expression.length() < EXPRESSION_LENGTH) {
+            expression += character;
+        }
     }
 
     // Called when clear button is pressed.
@@ -115,7 +127,7 @@ public class Summer {
                 reply = performanceReview[4];
             }
         } catch (Exception e) {
-            reply = "That's not what I asked for, man...";
+            reply = "That's not what really what I was asking for...";
         }
 
         prevEvent = 0;
@@ -128,17 +140,14 @@ public class Summer {
      * Reply is updated to reflect what happens in the event
      */
     private void doEvent() {
+        result = calc.getResult();
         if (event == 0 || event == 8) {
-            result = calc.getResult();
-            reply = calc.getExpression() + " = " + result + ". " + getRandomReply(calcPerformed);
+            changeOutputResult();
+            reply = calc.getExpression() + " = " + outputResult + ". " + getRandomReply(calcPerformed);
         } else if (event >= 1 && event <= 6) {
-            int addSub = getRandomWithExclusion(0, 2, null);
-            if (addSub == 0) {
-                result = calc.getResult() + event;
-            } else {
-                result = calc.getResult() - event;
-            }
-            reply = calc.getExpression() + " = " + result + ". " + getRandomReply(calcPerformed);
+            result += event;
+            changeOutputResult();
+            reply = calc.getExpression() + " = " + outputResult + ". " + getRandomReply(calcPerformed);
         } 
         
         else {
@@ -157,6 +166,19 @@ public class Summer {
         prevEvent = event;
         event = getNextEvent();
     }
+
+    private void changeOutputResult() {
+        if (doubleEqualsInt(result, getResultInt())) {
+            outputResult = Integer.toString(getResultInt());
+        } else {
+            outputResult = Double.toString(result);
+        }
+    }
+
+    private boolean doubleEqualsInt(double d, int i) {
+        return d == (double) i;
+    }
+
 
     // Generates next event randomly. Excludes current event.
     private int getNextEvent() {
@@ -183,6 +205,7 @@ public class Summer {
         return replies[rnd];
     }
 
+
     // Should only be used for testing. Allows testing of a specific event without randomness being a pain.
     public void setEvent(int newEvent) {
         event = newEvent;
@@ -191,6 +214,10 @@ public class Summer {
 
     public double getResult() {
         return result;
+    }
+
+    public int getResultInt() {
+        return (int) result;
     }
 
     public String getExpression() {
@@ -203,5 +230,13 @@ public class Summer {
 
     public int getEvent() {
         return event;
+    }
+
+    public int getPrevEvent() {
+        return prevEvent;
+    }
+
+    public Calculator getCalculator() {
+        return calc;
     }
 }
