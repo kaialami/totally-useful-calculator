@@ -1,6 +1,9 @@
 package test.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
+import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -36,7 +39,7 @@ public class SummerTest {
         assertEquals(summer.getPrevEvent(), 0);
         assertEquals(summer.getReply(), Summer.GREETING);
         
-        System.out.println("    - testConstructor passed");
+        System.out.println("    - testConstructor passed\n");
     }
 
     @Test
@@ -52,7 +55,7 @@ public class SummerTest {
 
 
 
-        System.out.println("    - testBecomeLonger passed");
+        System.out.println("    - testBecomeLonger passed\n");
     }
 
     @Test
@@ -63,7 +66,7 @@ public class SummerTest {
         summer.becomeLonger("+");
         assertEquals(summer.getExpression(), "0000000000");
  
-        System.out.println("    - testBecomeLongerTooLong passed");
+        System.out.println("    - testBecomeLongerTooLong passed\n");
 
     }
 
@@ -74,7 +77,7 @@ public class SummerTest {
         summer.clear();
         assertEquals(summer.getExpression(), "");
 
-        System.out.println("    - testClear passed");
+        System.out.println("    - testClear passed\n");
     }
 
     private void updateSetup(int event) {
@@ -92,6 +95,7 @@ public class SummerTest {
 
         assertEquals(summer.getExpression(), "1+2");
         assertEquals(summer.getResult(), 3, delta);
+        assertFalse(summer.getEvent() == 0);
         System.out.println("        event 0: " + summer.getReply());
         summer.clear();
 
@@ -104,9 +108,10 @@ public class SummerTest {
         summer.update();
         assertEquals(summer.getExpression(), "1+2/4");
         assertEquals(summer.getResult(), 1.5, delta);
+        assertFalse(summer.getEvent() == 0);
         System.out.println("        event 0: " + summer.getReply());
 
-        System.out.println("    - testUpdate0 passed");
+        System.out.println("    - testUpdate0 passed\n");
     }
 
     @Test
@@ -116,17 +121,57 @@ public class SummerTest {
             updateSetup(i);
             assertEquals(summer.getExpression(), "1+2");
             assertEquals(summer.getResult(), sum + i, delta);
+            assertFalse(summer.getEvent() == i);
             System.out.println("        event " + i + ": " + summer.getReply());
             summer.clear();
         }
 
-        System.out.println("    - testUpdate1to6 passed");
+        System.out.println("    - testUpdate1to6 passed\n");
     }
 
     @Test
     public void testUpdate7() {
         updateSetup(7);
-        // assertEquals
+        assertEquals(summer.getReply(), Summer.REFUSE);
+        assertFalse(summer.getEvent() == 7);
+    }
+
+
+    @Test
+    // prints 10 different shuffles for visual test
+    // only checks if no repeats (sorted map == default map)
+    public void testShuffleNumMap() {
+        System.out.println("    - testShuffleNumMap: ");
+        for (int rep = 0; rep < 10; rep++) {
+            System.out.print("          rep " + rep + "     numMap = ");
+            summer.setEvent(8);     // shuffles numMap
+            int[] numMap = summer.getNumMap();
+            System.out.println(Arrays.toString(numMap));
+            Arrays.sort(numMap);
+            System.out.println("                    sorted = " + Arrays.toString(numMap)); 
+            summer.setEvent(0);     // numMap set to default
+
+            assertEquals(numMap, Summer.DEFAULT_MAP);
+        }
+        System.out.println("    - testShuffleNumMap passed\n");
+    }
+
+
+    @Test
+    public void testUpdate8() {
+        System.out.println("    - testUpdate8: ");
+        for (int rep = 0; rep < 10; rep++) {
+            updateSetup(8);
+            String expression = summer.getExpression();
+            int[] numMap = summer.getNumMap();
+            System.out.println("          rep " + rep + "     expression = " + summer.getExpression());
+            assertEquals(expression.substring(0, 1), Integer.toString(numMap[1]));
+            assertEquals(expression.substring(2),             Integer.toString(numMap[2]));
+            summer.clear();
+        }
+        summer.setEvent(0);
+
+        System.out.println("    - testUpdate8 passed\n");
     }
 
 }
