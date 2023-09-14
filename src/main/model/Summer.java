@@ -20,10 +20,9 @@ import java.util.Random;
      "+", "-", "*", "/", "(", ")", "."};
  * 
  * TO DO :
- *      figure out how to do event 8.
- *      write tests and test everything out.
  */
 public class Summer {
+    // constants
     public static final int MAX_EVENT = 10;
     public static final int EXPRESSION_LENGTH = 10;
 
@@ -37,14 +36,26 @@ public class Summer {
                                                     "Next problem, please." ,
                                                     "What's next?"};
 
-    public static final String[] PERFORMANCEREVIEW = { "Wow... that bad?",
-                                                        "Hmph, whatever.",
-                                                        "Thanks for your feedback.",
-                                                        "Thank you!" ,
-                                                        "Wow! Thanks!" };
+    public static final String PERFORMANCE_REVIEW = "On a scale from 1-10, how satisfied are you about my performance?";
+    public static final String[] PERFORMANCE_REVIEW_RESPONSE = {    "Wow... that bad?",
+                                                                    "Hmph, whatever.",
+                                                                    "Thanks for your feedback.",
+                                                                    "Thank you!" ,
+                                                                    "Wow! Thanks!" };
+    public static final String PERFORMANCE_REVIEW_WRONG = "That's not what really what I was asking for...";
 
     public static final String REFUSE = "Nah, I don't really feel like it.";
 
+    public static final String SLEEP = "Goodnight... zzzzzzzzzz";
+    public static final String SLEEPY_SLEEPY = "zzzzzzzzzzzzzz......";
+    public static final String WAKEUP = "Wah!";
+
+    public static final String HELLO = "Hello!";
+
+    public static final String ERROR = "Sorry, that's either too big or not a real expression.";
+
+
+    // private member variables
     private Calculator calc;
     private String expression;
     private double result;
@@ -53,6 +64,7 @@ public class Summer {
     private int prevEvent;
     private String reply;
     private int[] numMap;
+    private boolean asleep;
 
 
 
@@ -65,6 +77,7 @@ public class Summer {
         prevEvent = event;
         reply = GREETING;
         numMap = DEFAULT_MAP;
+        asleep = false;
     }
 
     /*
@@ -95,6 +108,7 @@ public class Summer {
     }
 
     // Called when clear button is pressed.
+    // Should be called once "=" is pressed (clear() isn't called in update() so update() is easier to test)
     public void clear() {
         expression = "";
     }
@@ -111,16 +125,20 @@ public class Summer {
         if (prevEvent == 10) {
             performanceReviewEvent();
         } 
+
+        else if (asleep) {
+            reply = SLEEPY_SLEEPY;
+        }
         
         else {
             if (expression == "01134") {
-                reply = "Hello!";
+                reply = HELLO;
             } else {
                 try {
                     calc.update(expression);
                     doEvent();                    
                 } catch (Exception e) {
-                    reply = "Sorry, that's either too big or not a real expression.";
+                    reply = ERROR;
                 }
             }
         }
@@ -133,18 +151,18 @@ public class Summer {
         try {
             feedback = Integer.parseInt(expression);
             if (feedback <= 0) {
-                reply = PERFORMANCEREVIEW[0];
+                reply = PERFORMANCE_REVIEW_RESPONSE[0];
             } else if (feedback >= 1 && feedback <= 3) {
-                reply = PERFORMANCEREVIEW[1];
+                reply = PERFORMANCE_REVIEW_RESPONSE[1];
             } else if (feedback >= 4 && feedback <= 6) {
-                reply = PERFORMANCEREVIEW[2];
+                reply = PERFORMANCE_REVIEW_RESPONSE[2];
             } else if (feedback >= 7 && feedback <= 9) {
-                reply = PERFORMANCEREVIEW[3];
+                reply = PERFORMANCE_REVIEW_RESPONSE[3];
             } else {
-                reply = PERFORMANCEREVIEW[4];
+                reply = PERFORMANCE_REVIEW_RESPONSE[4];
             }
         } catch (Exception e) {
-            reply = "That's not what really what I was asking for...";
+            reply = PERFORMANCE_REVIEW_WRONG;
         }
 
         prevEvent = 0;
@@ -182,11 +200,12 @@ public class Summer {
                         break;
 
                 // Falls asleep. Requires action to wake up (cick fog horn)
-                case 9: reply = "Goodnight... zzzzzzzzzz";
+                case 9: reply = SLEEP;
+                        asleep = true;
                         break;
                 
                 // Instead of calculating, takes next input as a rating.
-                case 10: reply = "On a scale from 1-10, how satisfied are you about my performance?";
+                case 10: reply = PERFORMANCE_REVIEW;
                         break;
             }
         }
@@ -210,6 +229,11 @@ public class Summer {
 			numMap[randomIndexToSwap] = numMap[i];
 			numMap[i] = temp;
 		}
+    }
+
+    public void wakeUp() {
+        reply = WAKEUP;
+        asleep = false;
     }
 
     private void changeOutputResult() {
