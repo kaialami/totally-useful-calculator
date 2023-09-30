@@ -24,7 +24,7 @@ import java.util.Random;
 public class Summer {
     // constants
     public static final int MAX_EVENT = 10;
-    public static final int EXPRESSION_LENGTH = 10;
+    public static final int EXPRESSION_LENGTH = 8;
 
     public static final int[] DEFAULT_MAP = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
