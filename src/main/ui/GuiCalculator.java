@@ -18,8 +18,8 @@ public class GuiCalculator extends JFrame {
     public GuiCalculator() {
         super("Totally Useful Calculator");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
-        setResizable(false);
+        setUndecorated(false);
+        setResizable(true);
 
         initGUI();
     }

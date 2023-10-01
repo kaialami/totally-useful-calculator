@@ -2,9 +2,9 @@ package main.ui;
 
 public class Main {
     public static void main(String[] args) {
-        new TerminalCalculator();
+        // new TerminalCalculator();
 
-        // new GuiCalculator();
+        new GuiCalculator();
 
     }
 }
