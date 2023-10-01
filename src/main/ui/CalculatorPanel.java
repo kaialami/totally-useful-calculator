@@ -4,6 +4,8 @@ package main.ui;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import main.model.Summer;
+
 import static org.junit.Assert.fail;
 
 import java.awt.*;
@@ -22,7 +24,27 @@ public class CalculatorPanel extends JPanel implements ActionListener {
     private int imageWidth;
     private int imageHeight;
 
+    private Summer summer;
+
     private JButton zero;
+    private JButton one;
+    private JButton two;
+    private JButton three;
+    private JButton four;
+    private JButton five;
+    private JButton six;
+    private JButton seven;
+    private JButton eight;
+    private JButton nine;
+    private JButton decimal;
+    private JButton openParenth;
+    private JButton closeParenth;
+    private JButton equals;
+    private JButton plus;
+    private JButton minus;
+    private JButton multiply;
+    private JButton divide;
+    private JButton clear;
 
     public CalculatorPanel() {
         setPreferredSize(new Dimension(GuiCalculator.WIDTH, GuiCalculator.HEIGHT-300));
@@ -37,6 +59,7 @@ public class CalculatorPanel extends JPanel implements ActionListener {
             fail("Failed to load image - aborting");
         }
 
+        summer = new Summer();
         buildButtons();
     }
 
@@ -44,18 +67,44 @@ public class CalculatorPanel extends JPanel implements ActionListener {
         int baseWidth = GuiCalculator.WIDTH/20;
         int baseHeight = GuiCalculator.HEIGHT/20;
         setLayout(null);
-        zero = new JButton("0", null);
-        zero.setActionCommand("0");
-        zero.addActionListener(this);
-        zero.setBounds(GuiCalculator.WIDTH/2 + GuiCalculator.WIDTH/39, GuiCalculator.HEIGHT/2 + GuiCalculator.HEIGHT/55, 
-                       baseWidth - baseWidth/10, baseHeight + baseHeight/2);
+
+        zero = setupButton( "0", 
+                            GuiCalculator.WIDTH/2 + GuiCalculator.WIDTH/39, 
+                            GuiCalculator.HEIGHT/2 + GuiCalculator.HEIGHT/55, 
+                            baseWidth - baseWidth/8, baseHeight + baseHeight/2);
         add(zero);
+
+        decimal = setupButton( ".", 
+                            GuiCalculator.WIDTH/2 + GuiCalculator.WIDTH/13, 
+                            GuiCalculator.HEIGHT/2 + GuiCalculator.HEIGHT/55, 
+                            baseWidth - baseWidth/6, baseHeight + baseHeight/2);
+        add(decimal);
+
+        plus = setupButton( "+", 
+                            GuiCalculator.WIDTH/2 + GuiCalculator.WIDTH/8, 
+                            GuiCalculator.HEIGHT/2 + GuiCalculator.HEIGHT/55, 
+                            baseWidth - baseWidth/6, baseHeight + baseHeight/2);
+        add(plus);        
+
+        equals = setupButton( "=", 
+                            GuiCalculator.WIDTH/2 + GuiCalculator.WIDTH*17/100, 
+                            GuiCalculator.HEIGHT/2 + GuiCalculator.HEIGHT/55, 
+                            baseWidth - baseWidth/6, baseHeight + baseHeight/2);
+        add(equals);        
+    }
+
+    private JButton setupButton(String label, int x, int y, int width, int height) {
+        JButton b = new JButton(label, null);
+        b.setActionCommand(label);
+        b.addActionListener(this);
+        b.setBounds(x, y, width, height);
+        return b;
     }
 
     public void actionPerformed(ActionEvent e) {
-        if ("0".equals(e.getActionCommand())) {
-            System.out.println("0");
-        }
+        // if ("0".equals(e.getActionCommand())) {
+            System.out.println(e.getActionCommand());
+        // }
     }
 
     @Override

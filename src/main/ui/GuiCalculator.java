@@ -21,7 +21,7 @@ public class GuiCalculator extends JFrame {
     public static Font FONT;
 
 
-    private Summer summer;
+    public Summer summer;
 
     private CalculatorPanel cPanel;
     private TitlePanel tPanel;
