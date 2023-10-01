@@ -8,9 +8,9 @@ import java.awt.event.*;
  * 
  */
 public class GuiCalculator extends JFrame {
-    public static final GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
-    public static final int WIDTH = device.getDisplayMode().getWidth();
-    public static final int HEIGHT = device.getDisplayMode().getHeight();
+    private static final Dimension scrn = Toolkit.getDefaultToolkit().getScreenSize();
+    public static final int WIDTH = scrn.width;
+    public static final int HEIGHT = scrn.height;
 
     /*
      * 
