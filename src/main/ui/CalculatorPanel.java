@@ -1,8 +1,14 @@
 package main.ui;
 
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import static org.junit.Assert.fail;
+
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 
 /* Custom panel containing calculator (includes clickable buttons, speech bubbles, etc)
@@ -10,10 +16,31 @@ import java.awt.*;
  * 
  */
 public class CalculatorPanel extends JPanel {
+    private Image calculatorImage;
+    private int imageWidth;
+    private int imageHeight;
 
 
     public CalculatorPanel() {
         setPreferredSize(new Dimension(GuiCalculator.WIDTH-100, GuiCalculator.HEIGHT-100));
         // setPreferredSize(new Dimension(GuiCalculator.WIDTH, GuiCalculator.HEIGHT));
+        try {
+            File f = new File("assets/images/smile-crop.png");
+            calculatorImage = ImageIO.read(f);
+            imageWidth = calculatorImage.getWidth(getFocusCycleRootAncestor());
+            imageHeight = calculatorImage.getHeight(getFocusCycleRootAncestor());
+            calculatorImage = calculatorImage.getScaledInstance(imageWidth * 3/4, imageHeight * 3/4, Image.SCALE_DEFAULT);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        g.drawImage(calculatorImage, 
+                    GuiCalculator.WIDTH/2-calculatorImage.getWidth(getFocusCycleRootAncestor())/2, 
+                    GuiCalculator.HEIGHT/2-calculatorImage.getWidth(getFocusCycleRootAncestor())/2, this);
     }
 }
