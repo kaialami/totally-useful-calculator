@@ -172,6 +172,28 @@ public class CalculatorPanel extends JPanel implements ActionListener {
                             GuiCalculator.HEIGHT/2 - GuiCalculator.HEIGHT*225/1000, 
                             baseWidth - baseWidth/6, baseHeight + baseHeight*2/5);
         add(divide);
+
+
+        // row 5
+        clear = setupButton( "clear", 
+                            GuiCalculator.WIDTH/2 + GuiCalculator.WIDTH/15, 
+                            GuiCalculator.HEIGHT/2 - GuiCalculator.HEIGHT*30/100, 
+                            baseWidth * 2, baseHeight + baseHeight*2/5);
+        add(clear);
+
+        openParenth = setupButton( "(", 
+                            GuiCalculator.WIDTH/2 + GuiCalculator.WIDTH*17/100, 
+                            GuiCalculator.HEIGHT/2 - GuiCalculator.HEIGHT*30/100, 
+                            baseWidth - baseWidth/6, baseHeight + baseHeight*2/5);
+        add(openParenth);
+
+        closeParenth = setupButton( ")", 
+                            GuiCalculator.WIDTH/2 + GuiCalculator.WIDTH*22/100, 
+                            GuiCalculator.HEIGHT/2 - GuiCalculator.HEIGHT*30/100, 
+                            baseWidth - baseWidth/6, baseHeight + baseHeight*2/5);
+        add(closeParenth);
+
+
     }
 
     private JButton setupButton(String label, int x, int y, int width, int height) {
@@ -217,5 +239,9 @@ public class CalculatorPanel extends JPanel implements ActionListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public Summer getSummer() {
+        return summer;
     }
 }

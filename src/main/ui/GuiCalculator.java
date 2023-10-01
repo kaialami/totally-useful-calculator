@@ -36,10 +36,10 @@ public class GuiCalculator extends JFrame {
         setResizable(true);
 
         initFont();
-
-        summer = new Summer();
-
         initGUI();
+
+        summer = cPanel.getSummer();
+        
         setExtendedState(MAXIMIZED_BOTH);
     }
 
