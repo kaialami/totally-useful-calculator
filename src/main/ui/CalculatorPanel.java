@@ -29,8 +29,8 @@ public class CalculatorPanel extends JPanel {
             calculatorImage = ImageIO.read(f);
             imageWidth = calculatorImage.getWidth(getFocusCycleRootAncestor());
             imageHeight = calculatorImage.getHeight(getFocusCycleRootAncestor());
-            calculatorImage = calculatorImage.getScaledInstance(imageWidth * 3/4, imageHeight * 3/4, Image.SCALE_DEFAULT);
-        } catch (IOException e) {
+            scaleBackground(imageWidth*3/4, imageHeight*3/4);
+                } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -40,7 +40,12 @@ public class CalculatorPanel extends JPanel {
         super.paintComponent(g);
 
         g.drawImage(calculatorImage, 
-                    GuiCalculator.WIDTH/2-calculatorImage.getWidth(getFocusCycleRootAncestor())/2, 
-                    GuiCalculator.HEIGHT/2-calculatorImage.getWidth(getFocusCycleRootAncestor())/2, this);
+                    GuiCalculator.WIDTH/2, GuiCalculator.HEIGHT/2-imageHeight/2, this);
+    }
+
+    private void scaleBackground(int x, int y) {
+        calculatorImage = calculatorImage.getScaledInstance(x, y, Image.SCALE_DEFAULT);
+        imageWidth = calculatorImage.getWidth(getFocusCycleRootAncestor());
+        imageHeight = calculatorImage.getHeight(getFocusCycleRootAncestor());
     }
 }
