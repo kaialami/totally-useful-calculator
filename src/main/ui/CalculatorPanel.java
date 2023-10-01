@@ -41,12 +41,14 @@ public class CalculatorPanel extends JPanel implements ActionListener {
     }
 
     private void buildButtons() {
+        int baseWidth = GuiCalculator.WIDTH/20;
+        int baseHeight = GuiCalculator.HEIGHT/20;
         setLayout(null);
         zero = new JButton("0", null);
         zero.setActionCommand("0");
         zero.addActionListener(this);
-        zero.setBounds(GuiCalculator.WIDTH/2 + 50, GuiCalculator.HEIGHT/2+45, 
-                        GuiCalculator.WIDTH/20-10, GuiCalculator.HEIGHT/20+25);
+        zero.setBounds(GuiCalculator.WIDTH/2, GuiCalculator.HEIGHT/2, 
+                       baseWidth, baseHeight);
         add(zero);
     }
 
