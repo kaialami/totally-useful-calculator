@@ -12,6 +12,8 @@ public class GuiCalculator extends JFrame {
     public static final int WIDTH = scrn.width;
     public static final int HEIGHT = scrn.height;
 
+    private CalculatorPanel cPanel;
+
     /*
      * 
      */
@@ -28,7 +30,9 @@ public class GuiCalculator extends JFrame {
     // initialize gui components
     private void initGUI() {
         getContentPane().removeAll();
-        add(new CalculatorPanel());
+        cPanel = new CalculatorPanel();
+        cPanel.setBackground(Color.white);
+        add(cPanel);
         pack();
         setLocation((WIDTH - getWidth()) / 2, (HEIGHT - getHeight()) / 2);
         setVisible(true);
