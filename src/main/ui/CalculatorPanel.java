@@ -7,6 +7,8 @@ import javax.swing.*;
 import static org.junit.Assert.fail;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -15,11 +17,12 @@ import java.io.IOException;
  * 
  * 
  */
-public class CalculatorPanel extends JPanel {
+public class CalculatorPanel extends JPanel implements ActionListener {
     private Image calculatorImage;
     private int imageWidth;
     private int imageHeight;
 
+    private JButton zero;
 
     public CalculatorPanel() {
         setPreferredSize(new Dimension(GuiCalculator.WIDTH, GuiCalculator.HEIGHT-300));
@@ -31,6 +34,25 @@ public class CalculatorPanel extends JPanel {
             scaleBackground(imageWidth*GuiCalculator.WIDTH/2000, imageHeight*GuiCalculator.WIDTH/2000);
         } catch (IOException e) {
             e.printStackTrace();
+            fail("Failed to load image - aborting");
+        }
+
+        buildButtons();
+    }
+
+    private void buildButtons() {
+        setLayout(null);
+        zero = new JButton("0", null);
+        zero.setActionCommand("0");
+        zero.addActionListener(this);
+        zero.setBounds(GuiCalculator.WIDTH/2 + 50, GuiCalculator.HEIGHT/2+45, 
+                        GuiCalculator.WIDTH/20-10, GuiCalculator.HEIGHT/20+25);
+        add(zero);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if ("0".equals(e.getActionCommand())) {
+            System.out.println("0");
         }
     }
 
