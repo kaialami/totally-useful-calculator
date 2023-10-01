@@ -68,6 +68,7 @@ public class CalculatorPanel extends JPanel implements ActionListener {
         int baseHeight = GuiCalculator.HEIGHT/20;
         setLayout(null);
 
+        // row 1
         zero = setupButton( "0", 
                             GuiCalculator.WIDTH/2 + GuiCalculator.WIDTH/39, 
                             GuiCalculator.HEIGHT/2 + GuiCalculator.HEIGHT/55, 
@@ -91,6 +92,35 @@ public class CalculatorPanel extends JPanel implements ActionListener {
                             GuiCalculator.HEIGHT/2 + GuiCalculator.HEIGHT/55, 
                             baseWidth - baseWidth/6, baseHeight + baseHeight/2);
         add(equals);        
+
+
+
+        // row 2
+        one = setupButton( "1", 
+                            GuiCalculator.WIDTH/2 + GuiCalculator.WIDTH/25, 
+                            GuiCalculator.HEIGHT/2 - GuiCalculator.HEIGHT/15, 
+                            baseWidth - baseWidth/8, baseHeight + baseHeight/2);
+        add(one);
+        
+        two = setupButton( "2", 
+                            GuiCalculator.WIDTH/2 + GuiCalculator.WIDTH/11, 
+                            GuiCalculator.HEIGHT/2 - GuiCalculator.HEIGHT/15, 
+                            baseWidth - baseWidth/5, baseHeight + baseHeight/2);
+        add(two);
+
+        three = setupButton( "3", 
+                            GuiCalculator.WIDTH/2 + GuiCalculator.WIDTH*14/100, 
+                            GuiCalculator.HEIGHT/2 - GuiCalculator.HEIGHT/15, 
+                            baseWidth - baseWidth/5, baseHeight + baseHeight/2);
+        add(three);
+
+        minus = setupButton( "-", 
+                            GuiCalculator.WIDTH/2 + GuiCalculator.WIDTH*19/100, 
+                            GuiCalculator.HEIGHT/2 - GuiCalculator.HEIGHT/15, 
+                            baseWidth - baseWidth/5, baseHeight + baseHeight/2);
+        add(minus);
+
+
     }
 
     private JButton setupButton(String label, int x, int y, int width, int height) {
@@ -98,6 +128,11 @@ public class CalculatorPanel extends JPanel implements ActionListener {
         b.setActionCommand(label);
         b.addActionListener(this);
         b.setBounds(x, y, width, height);
+
+        // b.setOpaque(false);
+        // b.setContentAreaFilled(false);
+        // b.setBorderPainted(false);
+
         return b;
     }
 
