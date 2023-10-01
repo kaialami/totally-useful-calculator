@@ -211,7 +211,9 @@ public class Summer {
         }
     
         prevEvent = event;
-        event = getNextEvent();
+        if (event != 10) {
+            event = getNextEvent();
+        }
 
         if (event == 8) {
             shuffleNumMap();
@@ -316,5 +318,9 @@ public class Summer {
 
     public int[] getNumMap() {
         return numMap;
+    }
+
+    public boolean isAsleep() {
+        return asleep;
     }
 }

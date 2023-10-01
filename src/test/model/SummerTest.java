@@ -2,6 +2,7 @@ package test.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 
@@ -64,7 +65,7 @@ public class SummerTest {
             summer.becomeLonger("0");
         }
         summer.becomeLonger("+");
-        assertEquals(summer.getExpression(), "0000000000");
+        assertEquals(summer.getExpression(), "00000000");
  
         System.out.println("    - testBecomeLongerTooLong passed\n");
 
@@ -174,4 +175,62 @@ public class SummerTest {
         System.out.println("    - testUpdate8 passed\n");
     }
 
+
+    @Test
+    public void testUpdate9() {
+
+        updateSetup(9);
+        assertTrue(summer.isAsleep());
+        assertEquals("1+2", summer.getExpression());
+        assertEquals(3.0, summer.getResult(), delta);
+        assertFalse(summer.getEvent() == 9);
+        assertEquals(summer.getReply(), Summer.SLEEP);
+
+        summer.becomeLonger("1");
+        summer.update();
+        assertEquals(summer.getReply(), Summer.SLEEPY_SLEEPY);
+
+        summer.wakeUp();
+        assertEquals(summer.getReply(), Summer.WAKEUP);
+        assertFalse(summer.isAsleep());
+        System.out.println("    - testUpdate9 passed\n");
+    }
+
+    @Test
+    public void testUpdate10Success() {
+        updateSetup(10);
+
+        assertEquals(summer.getReply(), Summer.PERFORMANCE_REVIEW);
+        assertTrue(summer.getEvent() == 10);    // event 10 doesn't changed until next update
+
+        summer.clear();
+        summer.becomeLonger("1");
+        summer.becomeLonger("0");
+        summer.update();
+
+
+        assertEquals(summer.getReply(), Summer.PERFORMANCE_REVIEW_RESPONSE[4]);
+        assertFalse(summer.getEvent() == 10);
+
+        System.out.println("    - testUpdate10Success passed\n");
+
+    }
+
+    @Test
+    public void testUpdate10Fail() {
+        updateSetup(10);
+
+        assertEquals(summer.getReply(), Summer.PERFORMANCE_REVIEW);
+        assertTrue(summer.getEvent() == 10);    // event 10 doesn't changed until next update
+
+        summer.clear();
+        summer.becomeLonger("1");
+        summer.becomeLonger("+");
+        summer.becomeLonger("1");
+        summer.update();
+
+        assertEquals(summer.getReply(), Summer.PERFORMANCE_REVIEW_WRONG);
+
+        System.out.println("    - testUpdate10Fail passedn\n");
+    }
 }
