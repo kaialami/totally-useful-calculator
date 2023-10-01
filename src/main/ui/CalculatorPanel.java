@@ -47,7 +47,7 @@ public class CalculatorPanel extends JPanel implements ActionListener {
         zero = new JButton("0", null);
         zero.setActionCommand("0");
         zero.addActionListener(this);
-        zero.setBounds(GuiCalculator.WIDTH/2, GuiCalculator.HEIGHT/2-300, 
+        zero.setBounds(GuiCalculator.WIDTH/2, GuiCalculator.HEIGHT/2, 
                        baseWidth, baseHeight);
         add(zero);
     }
@@ -63,7 +63,7 @@ public class CalculatorPanel extends JPanel implements ActionListener {
         super.paintComponent(g);
 
         g.drawImage(calculatorImage, 
-                    GuiCalculator.WIDTH/2, GuiCalculator.HEIGHT/2-imageHeight/2-150, this);
+                    GuiCalculator.WIDTH/2, GuiCalculator.HEIGHT/10, this);
     }
 
     private void scaleBackground(int x, int y) {
