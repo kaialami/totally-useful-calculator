@@ -22,14 +22,13 @@ public class CalculatorPanel extends JPanel {
 
 
     public CalculatorPanel() {
-        setPreferredSize(new Dimension(GuiCalculator.WIDTH-100, GuiCalculator.HEIGHT-100));
-        // setPreferredSize(new Dimension(GuiCalculator.WIDTH, GuiCalculator.HEIGHT));
+        setPreferredSize(new Dimension(GuiCalculator.WIDTH, GuiCalculator.HEIGHT));
         try {
             File f = new File("assets/images/smile-crop.png");
             calculatorImage = ImageIO.read(f);
             imageWidth = calculatorImage.getWidth(getFocusCycleRootAncestor());
             imageHeight = calculatorImage.getHeight(getFocusCycleRootAncestor());
-            scaleBackground(imageWidth*3/4, imageHeight*3/4);
+            scaleBackground(imageWidth*3/5, imageHeight*3/5);
                 } catch (IOException e) {
             e.printStackTrace();
         }

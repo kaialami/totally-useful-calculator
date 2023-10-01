@@ -24,6 +24,7 @@ public class GuiCalculator extends JFrame {
         setResizable(true);
 
         initGUI();
+        setExtendedState(MAXIMIZED_BOTH);
     }
 
 
