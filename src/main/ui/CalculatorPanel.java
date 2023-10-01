@@ -22,14 +22,14 @@ public class CalculatorPanel extends JPanel {
 
 
     public CalculatorPanel() {
-        setPreferredSize(new Dimension(GuiCalculator.WIDTH, GuiCalculator.HEIGHT));
+        setPreferredSize(new Dimension(GuiCalculator.WIDTH, GuiCalculator.HEIGHT-300));
         try {
             File f = new File("assets/images/smile-crop.png");
             calculatorImage = ImageIO.read(f);
             imageWidth = calculatorImage.getWidth(getFocusCycleRootAncestor());
             imageHeight = calculatorImage.getHeight(getFocusCycleRootAncestor());
             scaleBackground(imageWidth*GuiCalculator.WIDTH/2000, imageHeight*GuiCalculator.WIDTH/2000);
-                } catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -39,12 +39,24 @@ public class CalculatorPanel extends JPanel {
         super.paintComponent(g);
 
         g.drawImage(calculatorImage, 
-                    GuiCalculator.WIDTH/2, GuiCalculator.HEIGHT/2-imageHeight/2, this);
+                    GuiCalculator.WIDTH/2, GuiCalculator.HEIGHT/2-imageHeight/2-150, this);
     }
 
     private void scaleBackground(int x, int y) {
         calculatorImage = calculatorImage.getScaledInstance(x, y, Image.SCALE_DEFAULT);
         imageWidth = calculatorImage.getWidth(getFocusCycleRootAncestor());
         imageHeight = calculatorImage.getHeight(getFocusCycleRootAncestor());
+    }
+
+    public void setBackgroundImage(String path) {
+        try {
+            File f = new File(path);
+            calculatorImage = ImageIO.read(f);
+            imageWidth = calculatorImage.getWidth(getFocusCycleRootAncestor());
+            imageHeight = calculatorImage.getHeight(getFocusCycleRootAncestor());
+            scaleBackground(imageWidth*GuiCalculator.WIDTH/2000, imageHeight*GuiCalculator.WIDTH/2000);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

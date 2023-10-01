@@ -2,6 +2,9 @@ package main.ui;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import main.model.Summer;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -15,7 +18,13 @@ public class GuiCalculator extends JFrame {
     public static final int WIDTH = scrn.width;
     public static final int HEIGHT = scrn.height;
 
+    public static Font FONT;
+
+
+    private Summer summer;
+
     private CalculatorPanel cPanel;
+    private TitlePanel tPanel;
 
     /*
      * 
@@ -26,17 +35,43 @@ public class GuiCalculator extends JFrame {
         setUndecorated(false);
         setResizable(true);
 
+        initFont();
+
+        summer = new Summer();
+
         initGUI();
         setExtendedState(MAXIMIZED_BOTH);
+    }
+
+
+    private void initFont() {
+        try {
+            FONT = Font.createFont(Font.TRUETYPE_FONT, new File("assets/fonts/Architex.ttf")).deriveFont(56f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(FONT);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (FontFormatException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 
     // initialize gui components
     private void initGUI() {
         getContentPane().removeAll();
+
+        tPanel = new TitlePanel();
+        tPanel.setBackground(Color.white);
+
         cPanel = new CalculatorPanel();
         cPanel.setBackground(Color.white);
-        add(cPanel);
+
+
+        add(tPanel, BorderLayout.NORTH);
+        add(cPanel, BorderLayout.CENTER);
         pack();
 
         setIconImage(new ImageIcon("assets/images/icon.png").getImage());
