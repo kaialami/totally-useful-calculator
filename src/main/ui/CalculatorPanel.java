@@ -28,7 +28,7 @@ public class CalculatorPanel extends JPanel {
             calculatorImage = ImageIO.read(f);
             imageWidth = calculatorImage.getWidth(getFocusCycleRootAncestor());
             imageHeight = calculatorImage.getHeight(getFocusCycleRootAncestor());
-            scaleBackground(imageWidth*3/5, imageHeight*3/5);
+            scaleBackground(imageWidth*GuiCalculator.WIDTH/2000, imageHeight*GuiCalculator.WIDTH/2000);
                 } catch (IOException e) {
             e.printStackTrace();
         }
