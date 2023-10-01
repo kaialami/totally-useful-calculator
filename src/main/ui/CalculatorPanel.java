@@ -121,6 +121,32 @@ public class CalculatorPanel extends JPanel implements ActionListener {
         add(minus);
 
 
+
+        // row 3
+        four = setupButton( "4", 
+                            GuiCalculator.WIDTH/2 + GuiCalculator.WIDTH/20, 
+                            GuiCalculator.HEIGHT/2 - GuiCalculator.HEIGHT*15/100, 
+                            baseWidth - baseWidth/15, baseHeight + baseHeight*3/5);
+        add(four);
+        
+        five = setupButton( "5", 
+                            GuiCalculator.WIDTH/2 + GuiCalculator.WIDTH/10, 
+                            GuiCalculator.HEIGHT/2 - GuiCalculator.HEIGHT*15/100, 
+                            baseWidth - baseWidth/15, baseHeight + baseHeight*3/5);
+        add(five);
+        
+        six = setupButton( "6", 
+                            GuiCalculator.WIDTH/2 + GuiCalculator.WIDTH*15/100, 
+                            GuiCalculator.HEIGHT/2 - GuiCalculator.HEIGHT*15/100, 
+                            baseWidth - baseWidth/10, baseHeight + baseHeight*3/5);
+        add(six);
+        
+        multiply = setupButton( "*", 
+                            GuiCalculator.WIDTH/2 + GuiCalculator.WIDTH*20/100, 
+                            GuiCalculator.HEIGHT/2 - GuiCalculator.HEIGHT*15/100, 
+                            baseWidth - baseWidth/5, baseHeight + baseHeight*3/5);
+        add(multiply);
+        
     }
 
     private JButton setupButton(String label, int x, int y, int width, int height) {
