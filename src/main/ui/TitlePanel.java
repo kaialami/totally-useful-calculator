@@ -17,7 +17,7 @@ public class TitlePanel extends JPanel {
     private JLabel byLabel;
 
     public TitlePanel() {
-        setPreferredSize(new Dimension(GuiCalculator.WIDTH, 200));
+        setPreferredSize(new Dimension(GuiCalculator.WIDTH, GuiCalculator.HEIGHT/10));
         
         titleLabel = new JLabel(TITLE);
         byLabel = new JLabel(BY);
