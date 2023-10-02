@@ -12,7 +12,7 @@ import java.util.Random;
  *   7:     Summer gets lazy and refuses to answer
  *   8:     Each number 0-9 gets mapped to a different number (e.g. input 1 + 2 might get you 5 + 3)
  *              Note that event 8 will take effect before "=" is pressed.
- *   9:     Summer falls asleep! You must wake her up ... but how?
+ *   9:     Summer falls asleep! You must wake her up ... but how? (she talks in her sleep)
  *   10:    Instead of answering, Summer asks you for a performance review! Don't forget to be truthful.
  * 
  * Legal inputs to calculator:
@@ -47,8 +47,8 @@ public class Summer {
     public static final String REFUSE = "Nah, I don't really feel like it.";
 
     public static final String SLEEP = "Goodnight... zzzzzzzzzz";
-    public static final String SLEEPY_SLEEPY = "zzzzzzzzzzzzzz......";
-    public static final String WAKEUP = "Wah!";
+    public static final String SLEEPY_SLEEPY = "zzzz...0...1...1...3...4...zzzzzz...";
+    public static final String WAKEUP = "Wah! Did I fall asleep?";
 
     public static final String HELLO = "Hello!";
 
@@ -127,7 +127,11 @@ public class Summer {
         } 
 
         else if (asleep) {
-            reply = SLEEPY_SLEEPY;
+            if (expression.equals("01134")) {
+                wakeUp();
+            } else {
+                reply = SLEEPY_SLEEPY;
+            }
         }
         
         else {
