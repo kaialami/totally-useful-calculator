@@ -26,7 +26,8 @@ public class CalculatorPanel extends JPanel implements ActionListener {
 
     private Summer summer;
 
-    private JLabel reply;
+    private JLabel replyLabel;
+    private JLabel expressionLabel;
 
     private JButton zero;
     private JButton one;
@@ -65,13 +66,20 @@ public class CalculatorPanel extends JPanel implements ActionListener {
         setLayout(null);
         buildButtons();
 
-        reply = new JLabel(summer.getReply());
-        reply.setFont(GuiCalculator.FONT.deriveFont(GuiCalculator.HEIGHT/20f));
-        reply.setBounds(GuiCalculator.WIDTH*15/1000, GuiCalculator.HEIGHT*10/100, GuiCalculator.WIDTH*50/100, GuiCalculator.HEIGHT*15/100);
-        reply.setHorizontalAlignment(SwingConstants.RIGHT); 
+        replyLabel = new JLabel(summer.getReply());
+        replyLabel.setFont(GuiCalculator.FONT.deriveFont(GuiCalculator.HEIGHT/20f));
+        replyLabel.setBounds(GuiCalculator.WIDTH*15/1000, GuiCalculator.HEIGHT*10/100, GuiCalculator.WIDTH*50/100, GuiCalculator.HEIGHT*15/100);
+        replyLabel.setHorizontalAlignment(SwingConstants.RIGHT); 
         // reply.setBorder(BorderFactory.createLineBorder(Color.black));
 
-        add(reply);
+        expressionLabel = new JLabel(summer.getExpression());
+        expressionLabel.setFont(GuiCalculator.FONT.deriveFont(GuiCalculator.HEIGHT/13f));
+        expressionLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+        expressionLabel.setBounds(GuiCalculator.WIDTH*575/1000, GuiCalculator.HEIGHT*12/100, GuiCalculator.WIDTH*18/100, GuiCalculator.HEIGHT*8/100);        
+        // expressionLabel.setBorder(BorderFactory.createLineBorder(Color.black));
+
+        add(replyLabel);
+        add(expressionLabel);
     }
 
     private void buildButtons() {
@@ -236,7 +244,8 @@ public class CalculatorPanel extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        reply.setText(summer.getReply());
+        replyLabel.setText(summer.getReply());
+        expressionLabel.setText(summer.getExpression());
 
         g.drawImage(calculatorImage, 
                     GuiCalculator.WIDTH/2, GuiCalculator.HEIGHT/20, this);
