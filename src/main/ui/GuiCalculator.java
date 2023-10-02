@@ -1,7 +1,8 @@
 package main.ui;
 
-import javax.swing.*;
+import main.model.Summer;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +16,9 @@ public class GuiCalculator extends JFrame {
     public static final int HEIGHT = scrn.height;
 
     public static Font FONT;
+
+
+    public Summer summer;
 
     private CalculatorPanel cPanel;
     private TitlePanel tPanel;
@@ -31,6 +35,7 @@ public class GuiCalculator extends JFrame {
         initFont();
         initGUI();
 
+        summer = cPanel.getSummer();
 
         setExtendedState(MAXIMIZED_BOTH);
     }
@@ -39,14 +44,16 @@ public class GuiCalculator extends JFrame {
     private void initFont() {
         try {
             FONT = Font.createFont(Font.TRUETYPE_FONT, new File("assets/fonts/Architex.ttf")).deriveFont(56f);
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(FONT);
         } catch (IOException e) {
             e.printStackTrace();
+
+            FONT = new Font("Times New Roman", Font.PLAIN, 56);
         } catch (FontFormatException e) {
             e.printStackTrace();
         }
 
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        ge.registerFont(FONT);
 
     }
 
@@ -66,7 +73,7 @@ public class GuiCalculator extends JFrame {
         add(cPanel, BorderLayout.CENTER);
         pack();
 
-        setIconImage(new ImageIcon("assets/images/icon2.png").getImage());
+        setIconImage(new ImageIcon("assets/images/characters/0.png").getImage());
         
         setLocation((WIDTH - getWidth()) / 2, (HEIGHT - getHeight()) / 2);
         setVisible(true);

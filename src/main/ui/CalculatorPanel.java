@@ -1,18 +1,17 @@
 package main.ui;
 
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-
 import main.model.Summer;
 
-import static org.junit.Assert.fail;
-
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+
+import static org.junit.Assert.fail;
 
 
 /* Custom panel containing calculator (includes clickable buttons, speech bubbles, etc)
@@ -53,7 +52,8 @@ public class CalculatorPanel extends JPanel implements ActionListener {
         setPreferredSize(new Dimension(GuiCalculator.WIDTH, GuiCalculator.HEIGHT-300));
         try {
             File f = new File("assets/images/smile-crop.png");
-            calculatorImage = ImageIO.read(f);
+//            calculatorImage = ImageIO.read(this.getClass().getClassLoader().getResource("assets/images/smile-crop.png"));
+             calculatorImage = ImageIO.read(f);
             imageWidth = calculatorImage.getWidth(getFocusCycleRootAncestor());
             imageHeight = calculatorImage.getHeight(getFocusCycleRootAncestor());
             scaleBackground(imageWidth*GuiCalculator.WIDTH/2000, imageHeight*GuiCalculator.WIDTH/2000);
