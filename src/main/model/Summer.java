@@ -76,7 +76,7 @@ public class Summer {
         event = 0;
         prevEvent = event;
         reply = GREETING;
-        numMap = DEFAULT_MAP;
+        numMap = DEFAULT_MAP.clone();
         asleep = false;
     }
 
@@ -196,7 +196,7 @@ public class Summer {
                 // Calculates as normal (event affects user as they input characters). Resets numMap.
                 case 8: changeOutputResult();
                         reply = calc.getExpression() + " = " + outputResult + ". " + getRandomReply(CALCPERFORMED);
-                        numMap = DEFAULT_MAP;
+                        numMap = DEFAULT_MAP.clone();
                         break;
 
                 // Falls asleep. Requires action to wake up (cick fog horn)

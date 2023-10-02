@@ -39,7 +39,7 @@ public class GuiCalculator extends JFrame {
         initGUI();
 
         summer = cPanel.getSummer();
-        
+
         setExtendedState(MAXIMIZED_BOTH);
     }
 
@@ -74,7 +74,7 @@ public class GuiCalculator extends JFrame {
         add(cPanel, BorderLayout.CENTER);
         pack();
 
-        setIconImage(new ImageIcon("assets/images/icon.png").getImage());
+        setIconImage(new ImageIcon("assets/images/icon2.png").getImage());
         
         setLocation((WIDTH - getWidth()) / 2, (HEIGHT - getHeight()) / 2);
         setVisible(true);
