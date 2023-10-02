@@ -69,7 +69,7 @@ public class CalculatorPanel extends JPanel implements ActionListener {
         reply.setFont(GuiCalculator.FONT.deriveFont(GuiCalculator.HEIGHT/20f));
         reply.setBounds(GuiCalculator.WIDTH*15/1000, GuiCalculator.HEIGHT*10/100, GuiCalculator.WIDTH*50/100, GuiCalculator.HEIGHT*15/100);
         reply.setHorizontalAlignment(SwingConstants.RIGHT); 
-        reply.setBorder(BorderFactory.createLineBorder(Color.black));
+        // reply.setBorder(BorderFactory.createLineBorder(Color.black));
 
         add(reply);
     }
