@@ -1,12 +1,8 @@
 package main.ui;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import main.model.Summer;
-
 import java.awt.*;
-import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 
@@ -19,9 +15,6 @@ public class GuiCalculator extends JFrame {
     public static final int HEIGHT = scrn.height;
 
     public static Font FONT;
-
-
-    public Summer summer;
 
     private CalculatorPanel cPanel;
     private TitlePanel tPanel;
@@ -38,7 +31,6 @@ public class GuiCalculator extends JFrame {
         initFont();
         initGUI();
 
-        summer = cPanel.getSummer();
 
         setExtendedState(MAXIMIZED_BOTH);
     }
