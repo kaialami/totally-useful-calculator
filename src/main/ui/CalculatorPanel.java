@@ -75,7 +75,7 @@ public class CalculatorPanel extends JPanel implements ActionListener {
         expressionLabel = new JLabel(summer.getExpression());
         expressionLabel.setFont(GuiCalculator.FONT.deriveFont(GuiCalculator.HEIGHT/13f));
         expressionLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        expressionLabel.setBounds(GuiCalculator.WIDTH*575/1000, GuiCalculator.HEIGHT*12/100, GuiCalculator.WIDTH*18/100, GuiCalculator.HEIGHT*8/100);        
+        expressionLabel.setBounds(GuiCalculator.WIDTH*575/1000, GuiCalculator.HEIGHT*11/100, GuiCalculator.WIDTH*18/100, GuiCalculator.HEIGHT*8/100);        
         // expressionLabel.setBorder(BorderFactory.createLineBorder(Color.black));
 
         add(replyLabel);
