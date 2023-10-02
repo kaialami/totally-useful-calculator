@@ -28,7 +28,7 @@ public class Summer {
 
     public static final int[] DEFAULT_MAP = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-    public static final String GREETING = "Hello! I'm Summer! You can count on me for your most important calculations!";
+    public static final String GREETING = "<html>Hello! I'm Summer! <br>You can count on me for your most important calculations!<html/>";
 
     public static final String[] CALCPERFORMED = { "This is easy!",
                                                     "Is that right?",
@@ -36,7 +36,7 @@ public class Summer {
                                                     "Next problem, please." ,
                                                     "What's next?"};
 
-    public static final String PERFORMANCE_REVIEW = "On a scale from 1-10, how satisfied are you about my performance?";
+    public static final String PERFORMANCE_REVIEW = "<html>On a scale from 1-10, <br>how satisfied are you about my performance?<html/>";
     public static final String[] PERFORMANCE_REVIEW_RESPONSE = {    "Wow... that bad?",
                                                                     "Hmph, whatever.",
                                                                     "Thanks for your feedback.",
@@ -131,7 +131,7 @@ public class Summer {
         }
         
         else {
-            if (expression == "01134") {
+            if (expression.equals("01134")) {
                 reply = HELLO;
             } else {
                 try {

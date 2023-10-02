@@ -26,6 +26,8 @@ public class CalculatorPanel extends JPanel implements ActionListener {
 
     private Summer summer;
 
+    private JLabel reply;
+
     private JButton zero;
     private JButton one;
     private JButton two;
@@ -60,13 +62,21 @@ public class CalculatorPanel extends JPanel implements ActionListener {
         }
 
         summer = new Summer();
+        setLayout(null);
         buildButtons();
+
+        reply = new JLabel(summer.getReply());
+        reply.setFont(GuiCalculator.FONT.deriveFont(GuiCalculator.HEIGHT/20f));
+        reply.setBounds(GuiCalculator.WIDTH*15/1000, GuiCalculator.HEIGHT*10/100, GuiCalculator.WIDTH*50/100, GuiCalculator.HEIGHT*15/100);
+        reply.setHorizontalAlignment(SwingConstants.RIGHT); 
+        reply.setBorder(BorderFactory.createLineBorder(Color.black));
+
+        add(reply);
     }
 
     private void buildButtons() {
         int baseWidth = GuiCalculator.WIDTH/20;
         int baseHeight = GuiCalculator.HEIGHT/20;
-        setLayout(null);
 
         // row 1
         zero = setupButton( "0", 
@@ -197,27 +207,36 @@ public class CalculatorPanel extends JPanel implements ActionListener {
     }
 
     private JButton setupButton(String label, int x, int y, int width, int height) {
-        JButton b = new JButton(label, null);
+        JButton b = new JButton("", null);
         b.setActionCommand(label);
         b.addActionListener(this);
         b.setBounds(x, y, width, height);
 
-        // b.setOpaque(false);
-        // b.setContentAreaFilled(false);
-        // b.setBorderPainted(false);
+        b.setOpaque(false);
+        b.setContentAreaFilled(false);
+        b.setBorderPainted(false);
 
         return b;
     }
 
-    public void actionPerformed(ActionEvent e) {
-        // if ("0".equals(e.getActionCommand())) {
-            System.out.println(e.getActionCommand());
-        // }
+    public void actionPerformed(ActionEvent e) {      
+        if ("clear".equals(e.getActionCommand())) {
+            summer.clear();
+        } else if ("=".equals(e.getActionCommand())) {
+            summer.update();
+            summer.clear();
+        } else {
+            summer.becomeLonger(e.getActionCommand());
+        }
+        
+        repaint();
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+        reply.setText(summer.getReply());
 
         g.drawImage(calculatorImage, 
                     GuiCalculator.WIDTH/2, GuiCalculator.HEIGHT/20, this);
