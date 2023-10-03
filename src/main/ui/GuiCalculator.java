@@ -4,8 +4,8 @@ import main.model.Summer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 /* Graphical interface for calculator.
  * 
@@ -43,11 +43,11 @@ public class GuiCalculator extends JFrame {
 
     private void initFont() {
         try {
-            FONT = Font.createFont(Font.TRUETYPE_FONT, new File("assets/fonts/Architex.ttf")).deriveFont(56f);
+            InputStream is = getClass().getClassLoader().getResourceAsStream("assets/fonts/Architex.ttf");
+            FONT = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(56f);
         } catch (IOException e) {
             e.printStackTrace();
 
-            FONT = new Font("Times New Roman", Font.PLAIN, 56);
         } catch (FontFormatException e) {
             e.printStackTrace();
         }
@@ -72,8 +72,7 @@ public class GuiCalculator extends JFrame {
         add(tPanel, BorderLayout.NORTH);
         add(cPanel, BorderLayout.CENTER);
         pack();
-
-        setIconImage(new ImageIcon("assets/images/characters/0.png").getImage());
+        setIconImage(new ImageIcon(getClass().getClassLoader().getResource("assets/images/characters/0.png")).getImage());
         
         setLocation((WIDTH - getWidth()) / 2, (HEIGHT - getHeight()) / 2);
         setVisible(true);

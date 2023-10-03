@@ -51,9 +51,7 @@ public class CalculatorPanel extends JPanel implements ActionListener {
     public CalculatorPanel() {
         setPreferredSize(new Dimension(GuiCalculator.WIDTH, GuiCalculator.HEIGHT-300));
         try {
-            File f = new File("assets/images/smile-crop.png");
-//            calculatorImage = ImageIO.read(this.getClass().getClassLoader().getResource("assets/images/smile-crop.png"));
-             calculatorImage = ImageIO.read(f);
+            calculatorImage = ImageIO.read(getClass().getClassLoader().getResource("assets/images/smile-crop.png"));
             imageWidth = calculatorImage.getWidth(getFocusCycleRootAncestor());
             imageHeight = calculatorImage.getHeight(getFocusCycleRootAncestor());
             scaleBackground(imageWidth*GuiCalculator.WIDTH/2000, imageHeight*GuiCalculator.WIDTH/2000);
@@ -70,13 +68,11 @@ public class CalculatorPanel extends JPanel implements ActionListener {
         replyLabel.setFont(GuiCalculator.FONT.deriveFont(GuiCalculator.HEIGHT/20f));
         replyLabel.setBounds(GuiCalculator.WIDTH*15/1000, GuiCalculator.HEIGHT*10/100, GuiCalculator.WIDTH*50/100, GuiCalculator.HEIGHT*15/100);
         replyLabel.setHorizontalAlignment(SwingConstants.RIGHT); 
-        // reply.setBorder(BorderFactory.createLineBorder(Color.black));
 
         expressionLabel = new JLabel(summer.getExpression());
         expressionLabel.setFont(GuiCalculator.FONT.deriveFont(GuiCalculator.HEIGHT/13f));
         expressionLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         expressionLabel.setBounds(GuiCalculator.WIDTH*575/1000, GuiCalculator.HEIGHT*11/100, GuiCalculator.WIDTH*18/100, GuiCalculator.HEIGHT*8/100);        
-        // expressionLabel.setBorder(BorderFactory.createLineBorder(Color.black));
 
         add(replyLabel);
         add(expressionLabel);
