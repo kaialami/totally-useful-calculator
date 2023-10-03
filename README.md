@@ -20,3 +20,5 @@ Mr X: Well, it definitely *looks* like a calculator, and it can definitely do ma
 Hahaha! Mr X, you are such a notorious little rascal, aren't you! <sup><sub>I thought I told you NOT to mention that, Mr X? This is your last warning....</sup></sub>
 
 Anyways, enough of me rambling on! Try it yourself, and be just one of our hundreds, nay, THOUSANDS of satisfied customers! Happy calculating!
+
+[Download here!](https://github.com/kaialami/totally-useful-calculator/releases/tag/Download)
